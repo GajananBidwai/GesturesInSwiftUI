@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isClick: Bool = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Image(.sample)
+            .onTapGesture {
+                location in
+                isClick = true
+                print("Location \(location)")
+            }
+            .sheet(isPresented: $isClick) {
+                ShowImage()
+            }
+
         }
         .padding()
     }
