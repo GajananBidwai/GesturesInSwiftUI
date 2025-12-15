@@ -52,12 +52,12 @@ struct ContentView: View {
 //                }
 //            }, perform: {})
             
-            Image(uiImage: .sample)
-                .resizable()
-                .scaledToFit()
+//            Image(uiImage: .sample)
+//                .resizable()
+//                .scaledToFit()
 //                .scaleEffect(zoom * magnification)
             // Rotation effect
-                .rotationEffect(rotation + rotationAngle)
+//                .rotationEffect(rotation + rotationAngle)
             // To zoom the image
 //                .gesture(
 //                    MagnifyGesture()
@@ -68,13 +68,19 @@ struct ContentView: View {
 //                            zoom *= value.magnification   // Store final zoom level
 //                        }
 //                )
-                .gesture(RotateGesture().updating($rotationAngle, body: { value, state, transaction in
-                    state = value.rotation
-                })
-                    .onEnded({ value in
-                        rotation = rotation + value.rotation
-                }))
-                    
+//                .gesture(RotateGesture().updating($rotationAngle, body: { value, state, transaction in
+//                    state = value.rotation
+//                })
+//                    .onEnded({ value in
+//                        rotation = rotation + value.rotation
+//                }))
+                  
+            //Hold and drag and drop the image - can test in ipad simulater splite the device
+            Image(.sample)
+                .resizable()
+                .frame(width: 300, height: 300)
+                .draggable(Image(.sample))
+                Spacer()
                 
         }
         .padding()
