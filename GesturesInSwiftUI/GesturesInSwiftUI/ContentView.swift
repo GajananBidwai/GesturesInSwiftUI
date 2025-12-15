@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var zoom: CGFloat = 1.0
     @GestureState private var rotationAngle: Angle = Angle.zero
     @State private var rotation: Angle = Angle.zero
+    @State private var picture: UIImage?
+    @State private var droppedImage: UIImage?
     
     var body: some View {
         VStack {
@@ -76,11 +78,22 @@ struct ContentView: View {
 //                }))
                   
             //Hold and drag and drop the image - can test in ipad simulater splite the device
-            Image(.sample)
-                .resizable()
-                .frame(width: 300, height: 300)
-                .draggable(Image(.sample))
-                Spacer()
+            Rectangle()
+                .fill(.gray.opacity(0.2))
+                .frame(width: 220, height: 220)
+                .overlay {
+                    if let droppedImage {
+                        Image(uiImage: droppedImage)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Text("Drop Here")
+                    }
+                }
+                .dropDestination(for: TransferImage.self) { items, _ in
+                    droppedImage = items.first?.image
+                    return droppedImage != nil
+                }
                 
         }
         .padding()
