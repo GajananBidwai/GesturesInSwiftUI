@@ -12,6 +12,8 @@ struct ContentView: View {
     @State var isPressing: Bool = false
     @State private var timer: Timer? = nil
     @State private var size: CGFloat = 20
+    @GestureState private var magnification: CGFloat = 1.0
+    @State private var zoom: CGFloat = 1.0
     
     var body: some View {
         VStack {
@@ -34,20 +36,35 @@ struct ContentView: View {
 //                ShowImage()
 //                
 //            }
-            VStack {
-                Image(.sample)
-                    .resizable()
-                    .frame(width: size, height: size)
-                    .animation(.easeInOut(duration: 0.1), value: size)
-            }
-            .onLongPressGesture(minimumDuration: 0.0, pressing: { pressing in
-                if pressing {
-                    startGrowing()
-                } else {
-                    stopGrowing()
-                }
-            }, perform: {})
+//            VStack {
+//                Image(.sample)
+//                    .resizable()
+//                    .frame(width: size, height: size)
+//                    .animation(.easeInOut(duration: 0.1), value: size)
+//            }
+//            .onLongPressGesture(minimumDuration: 0.0, pressing: { pressing in
+//                if pressing {
+//                    startGrowing()
+//                } else {
+//                    stopGrowing()
+//                }
+//            }, perform: {})
             
+            Image(uiImage: .sample)
+                .resizable()
+                .scaledToFit()
+                .scaleEffect(zoom * magnification)
+            // To zoom the image
+                .gesture(
+                    MagnifyGesture()
+                        .updating($magnification) { value, state, _ in
+                            state = value.magnification
+                        }
+                        .onEnded { value in
+                            zoom *= value.magnification   // Store final zoom level
+                        }
+                )
+                    
                 
         }
         .padding()
