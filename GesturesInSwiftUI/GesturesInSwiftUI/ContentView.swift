@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var size: CGFloat = 20
     @GestureState private var magnification: CGFloat = 1.0
     @State private var zoom: CGFloat = 1.0
+    @GestureState private var rotationAngle: Angle = Angle.zero
+    @State private var rotation: Angle = Angle.zero
     
     var body: some View {
         VStack {
@@ -53,17 +55,25 @@ struct ContentView: View {
             Image(uiImage: .sample)
                 .resizable()
                 .scaledToFit()
-                .scaleEffect(zoom * magnification)
+//                .scaleEffect(zoom * magnification)
+            // Rotation effect
+                .rotationEffect(rotation + rotationAngle)
             // To zoom the image
-                .gesture(
-                    MagnifyGesture()
-                        .updating($magnification) { value, state, _ in
-                            state = value.magnification
-                        }
-                        .onEnded { value in
-                            zoom *= value.magnification   // Store final zoom level
-                        }
-                )
+//                .gesture(
+//                    MagnifyGesture()
+//                        .updating($magnification) { value, state, _ in
+//                            state = value.magnification
+//                        }
+//                        .onEnded { value in
+//                            zoom *= value.magnification   // Store final zoom level
+//                        }
+//                )
+                .gesture(RotateGesture().updating($rotationAngle, body: { value, state, transaction in
+                    state = value.rotation
+                })
+                    .onEnded({ value in
+                        rotation = rotation + value.rotation
+                }))
                     
                 
         }
