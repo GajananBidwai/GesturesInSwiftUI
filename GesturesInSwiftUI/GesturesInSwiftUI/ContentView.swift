@@ -23,11 +23,11 @@ struct ContentView: View {
         VStack {
 //            Image(.sample)
 //                .opacity(isPressing ? 0 : 1)
-////            .onTapGesture {
-////                location in
-////                isClick = true
-////                print("Location \(location)")
-////            }
+//            .onTapGesture {
+//                location in
+//                isClick = true
+//                print("Location \(location)")
+//            }
 //            .onLongPressGesture(minimumDuration: 1, maximumDistance: 10 ,perform: {
 //                isClick = true
 //            }, onPressingChanged: { value in
@@ -35,7 +35,7 @@ struct ContentView: View {
 //                    isPressing = value
 //                }
 //            })
-//            
+            
 //            .sheet(isPresented: $isClick) {
 //                ShowImage()
 //                
@@ -58,9 +58,9 @@ struct ContentView: View {
 //                .resizable()
 //                .scaledToFit()
 //                .scaleEffect(zoom * magnification)
-            // Rotation effect
+//             Rotation effect
 //                .rotationEffect(rotation + rotationAngle)
-            // To zoom the image
+//             To zoom the image
 //                .gesture(
 //                    MagnifyGesture()
 //                        .updating($magnification) { value, state, _ in
