@@ -20,7 +20,7 @@ struct TopicsListView: View {
                         .font(.headline)
                 }
             }
-            .navigationTitle("Map Topics")
+            .navigationTitle("Gesture Topics")
             .onAppear {
                 viewModel.loadTopics()
             }
